@@ -1,0 +1,78 @@
+{{ block title }}
+    Introduction (Page 3 of 3)
+    {% load otree static %}
+    <link rel="stylesheet" href="{% static 'global/css/button.css' %}"/>
+{{ endblock }}
+{{ block content }}
+
+    <style> p {text-align: left; }
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+    </style>
+
+    <p><b>Main Task</b></p>
+
+    <p><u>The Value of the Asset and Earnings</u></p>
+
+    <ul>
+        <li>In each round, neither the buyer nor the seller will know the exact value of the asset.
+However, each participant will receive a private signal about the value of the asset. This means that the participant whom you are paired with will not know which signal you get, and you will not know which signal the participant you are paired with gets.
+</li>
+    </ul>
+
+    <ul>
+        <li>The private signals for the buyer and seller will be drawn from one of two possible private signals with equal probability.</li>
+    </ul>
+
+    <ul>
+        <li>The value of the asset <b>$V</b> to the seller is a weighted sum of the private signals. </li>
+    </ul>
+    <ul>
+        <li><b>Example</b>:</li>
+        <ul>
+            <li>The two possible private signals, <b>$1</b> and <b>$2</b>, are drawn with equal probability.</li>
+            <li>If the <b><span style="color: #ff0000">buyer’s private signal</span></b> is <b><span style="color: #ff0000">$1</span></b> and the <b><span style="color: #0000CD">seller’s private signal</span></b> is <b><span style="color: #0000CD">$2</span></b>, and the weights on the buyer’s and seller’s private signals are <b>0.8</b> and <b>0.2</b>, respectively, then <b>$V</b> is <b>0.8</b> times <b><span style="color: #ff0000">$1</span></b> plus <b>0.2</b> times <b><span style="color: #0000CD">$2</span></b>, i.e., <b>0.8</b> x <b><span style="color: #ff0000">$1</span></b> + <b>0.2</b> x <b><span style="color: #0000CD">$2</span></b> =<b>$1.2</b>.</li>
+            <li>The asset is worth <b>$V = $1.2</b> to the seller.</li>
+            <li>The asset is worth <b>1.5</b> times <b>$V</b>, or 50% more to the buyer. Hence, the asset is worth <b>$1.8</b> to the buyer. </li>
+        </ul>
+    </ul>
+
+    <ul>
+        <li>Your earnings for each round depend on the choices made by you and the participant you are paired with.</li>
+        <ul>
+            <li>If the bid is accepted, the buyer gains the asset and earns <b>1.5</b> times <b>$V</b> minus the bid, and the seller earns the bid.</li>
+            <li>If the bid is rejected, the buyer earns <b>$0</b>, and the seller keeps the asset and earns <b>$V</b>.</li>
+        </ul>
+    </ul>
+
+    <ul>
+        <li>Note that the private signals and weights may change from round to round.
+    </ul>
+
+    <ul>
+        <li>You will be given a calculator that will appear on the screen in each round.
+    </ul>
+
+    <ul>
+        <li>You will see a summary of the choices made by you and the participant you are paired with, as well as your earnings at the end of each round.
+    </ul>
+
+    <p><b>Additional Task</b></p>
+
+    <p>
+        In this segment, you will make 10 decisions. For each decision, you will choose between two options. One of the 10 decisions will be randomly chosen by the computer for your final earnings.
+    </p>
+
+    <p><b>End of the Experiment</b></p>
+
+    <p>
+        At the end of the experiment, the computer will randomly select one of 15 rounds from the main task to determine your final earnings in this experiment. The earnings from this chosen round will be multiplied by four to calculate your final earnings. In addition to the earnings from one of the 15 rounds that is scaled up by a factor of four, and earnings from one of the 10 decisions from the additional task, you will receive a show-up fee of $10. Your total earnings from this experiment will be displayed on the screen at the end of the experiment.
+    </p>
+
+    <button class="button">Next</button>
+{{ endblock }}

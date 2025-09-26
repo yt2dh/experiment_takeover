@@ -1,0 +1,48 @@
+{{ block title }}
+    <h1>This is the end of the experiment.</h1>
+{{ endblock }}
+{{ block content }}
+
+    <style> p {text-align: left; font-size: 1.2em}
+            .paragraph2 {font-size: 18px;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+            h1 {
+                      text-align: center;
+                      margin-bottom: 35px;
+            }
+    </style>
+
+
+    <p class="paragraph2"> Your final earnings from this experiment is as follows.</p>
+
+    <p><u>Main Task </u></p>
+    <p class="paragraph2">
+        <b>Round {{ player.selected_round }}</b> is randomly selected for payment.
+        Your earnings in <b>Round {{ player.selected_round }}</b> is <b>{{ player.selected_payoff }}</b>, which is scaled up by a factor of four to <b><span style="color: #800000">{{ player.selected_payoff_scaled }}</span></b> to calculate your final earnings from the main task.
+    </p>
+
+    <p><u>Additional Task </u></p>
+    <p class="paragraph2">
+        <b>Row 5</b> is randomly selected for payment.
+        Your earnings in <b>Row 5</b> is <b><span style="color: #800000">{{ player.AT_Payoff }}</span></b>.
+    </p>
+
+    <p><u>Show-Up Fee </u></p>
+    <p class="paragraph2">
+        You earn a show-up fee of <b><span style="color: #800000">${{ Constants.fee }}</span></b>.
+    </p>
+
+    <p><u>Final Earnings </u></p>
+    <p class="paragraph2">
+        Therefore, your final earnings in this experiment is <span style="color: #008000"><b>{{ player.final_payoff }}</span></b>.
+    </p>
+
+    <p class="paragraph2"> Thank you for your participation. Please wait until your number is called to receive your payment.</p>
+
+{{ endblock }}

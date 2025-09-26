@@ -1,0 +1,126 @@
+{{ block title }}
+    <b>Round {{ player.round_number }}</b>
+    {% load otree static %}
+    <link rel="stylesheet" href="{% static 'global/css/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'global/css/button.css' %}"/>
+{{ endblock }}
+{{ block content }}
+
+    <style> p {text-align: left;}
+            .paragraph1 {font-size: 26px;}
+            .paragraph2 {font-size: 18px;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+            table, th, td {
+              border:1px solid black;
+              text-align: center;
+            }
+    </style>
+
+    <p class="paragraph1">You are the <b>seller</b>. You own the asset.</p>
+
+    <p class="paragraph2">The asset is worth <b>$V</b> to you, where <b>$V</b> is <b>{{ Beta_Complement }}</b> times <b><span style="color: #0000CD">your private signal</span></b> plus <b>{{ Beta }}</b> times <b><span style="color: #ff0000">the buyer's private signal</span></b>.</p>
+
+    <p class="paragraph2"><b><span style="color: #0000CD">Your private signal</span></b> is <b><span style="color: #0000CD">{{ player.signal }}</b></b>.</p>
+
+    <p class="paragraph2"><b><span style="color: #ff0000">The buyer's private signal</span></b> is equally likely to be <b><span style="color: #ff0000">${{ Constants.ThetaMin|to2 }}</b> or <b><span style="color: #ff0000">${{ ThetaMax|to2 }}</b>.</p>
+
+    <p class="paragraph2">Hence, <b>$V</b> = <span style="color: #0000CD"><b>{{ player.signal_weight }}</span></b> + <b><span style="color: #ff0000">?</span></b>, where <b><span style="color: #ff0000">?</span></b> is equally likely to be <b><span style="color: #ff0000">{{player.signal_weight_opp_low}}</span></b> or <b><span style="color: #ff0000">{{player.signal_weight_opp_high}}</span></b>. </p>
+
+    <p class="paragraph2">This means that there is a <b>50%</b> chance that <b>$V</b> is <b>{{player.signal_weight_total_low}}</b> and a <b>50%</b> chance that <b>$V</b> is <b>{{player.signal_weight_total_high}}</b>.</p>
+
+    <p class="paragraph2">The asset is worth <b>1.5</b> times <b>$V</b> to the buyer, so there is a <b>50%</b> chance that the asset is worth <b>{{player.signal_weight_total_fifty_low}}</b> and a <b>50%</b> chance that the asset is worth <b>{{player.signal_weight_total_fifty_high}}</b> to the buyer.</p>
+
+    <p class="paragraph2">To summarize, based on <b><span style="color: #0000CD">your private signal</span></b> of <b><span style="color: #0000CD">{{ player.signal }}</b>:</p>
+
+        <table class="table">
+  <thead>
+    <tr>
+      <th><b>Chance</b></th>
+      <th><b>Value to you, $V</b></th>
+      <th><b>Value to the buyer, 1.5 x $V</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>50%</b></td>
+      <td><b>{{player.signal_weight_total_low}}</b></td>
+      <td><b>{{player.signal_weight_total_fifty_low}}</b></td>
+    </tr>
+    <tr>
+      <td><b>50%</b></td>
+      <td><b>{{player.signal_weight_total_high}}</b></td>
+      <td><b>{{player.signal_weight_total_fifty_high}}</b></td>
+    </tr>
+  </tbody>
+</table>
+
+    <p class="paragraph2"><u>Remember that the buyer only knows that <b><span style="color: #0000CD">your private signal</span></b> is equally likely to be <b><span style="color: #0000CD">${{ Constants.ThetaMin|to2 }}</b> or <b><span style="color: #0000CD">${{ ThetaMax|to2 }}</b></u>.</p>
+
+
+    <p class="paragraph1">The buyer's bid is <b><span style="color: #E57200">{{ group.buyer_choice }}</b>. </p>
+
+    <ul>
+    <li style="font-size:18px">If you <b>accept</b> the bid, your earnings for this round will be <b><span style="color: #E57200">{{ group.buyer_choice }}</b>.</li>
+
+    <li style="font-size:18px">If you <b>reject</b> the bid, your earnings for this round will be <b>$V</b>.
+    </ul>
+
+    <p class="paragraph1">Do you accept or reject the bid <b><span style="color: #E57200">{{ group.buyer_choice }}</b>?&nbsp;</p>
+
+<p style="text-align: center;font-size:1.3em" >
+     &nbsp;
+     <b> Accept </b> {{ form.seller_choice.1 }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+         <b> Reject </b> {{ form.seller_choice.0 }} <!--change Fixed_Floating_Choice.0 and 1 -->
+    <!--OG Fixed_Floating_Choice.1 and 0 -->&nbsp;
+    </p>
+
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<body>
+    <div class="container">
+        <div class="calculator">
+            <form>
+                <div class="display">
+                    <input type="text" name="display" class="output numbers2">
+                </div>
+                <div>
+                    <input type="button" value="AC" class="equal operator numbers" onclick="display.value = '' ">
+                    <input type="button" value="DE" onclick="display.value = display.value.toString().slice(0,-1)" class="operator numbers">
+                    <input type="button" value="/" onclick="display.value += '/' " class="operator numbers">
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="display.value += '7' " class="numbers">
+                    <input type="button" value="8" onclick="display.value += '8' " class="numbers">
+                    <input type="button" value="9" onclick="display.value += '9' " class="numbers">
+                    <input type="button" value="*" onclick="display.value += '*' " class="operator numbers">
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="display.value += '4' " class="numbers">
+                    <input type="button" value="5" onclick="display.value += '5' " class="numbers">
+                    <input type="button" value="6" onclick="display.value += '6' " class="numbers">
+                    <input type="button" value="-" onclick="display.value += '-' " class="operator numbers">
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="display.value += '1' " class="numbers">
+                    <input type="button" value="2" onclick="display.value += '2' " class="numbers">
+                    <input type="button" value="3" onclick="display.value += '3' " class="numbers">
+                    <input type="button" value="+" onclick="display.value += '+' " class="operator numbers">
+                </div>
+                <div>
+                    <input type="button" value="0" onclick="display.value += '0' " class="numbers">
+                    <input type="button" value="." onclick="display.value += '.' " class="numbers numbers">
+                    <input type="button" value="=" onclick="display.value = eval(display.value)" class="equal operator numbers">
+                </div>
+
+            </form>
+    </div>
+</body>
+
+    <button class="button">Next</button>
+{{ endblock }}

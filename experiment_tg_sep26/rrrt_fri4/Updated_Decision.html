@@ -1,0 +1,306 @@
+{% extends "global/Page.html" %}
+{% block content %}
+<h1>Interactive Game Tree</h1>
+<p>Please carefully think about which action you would like to take.</p>
+<p>Round Number: {{ round_number }}</p>
+<p>Your Role: {{ player.role }}</p>
+
+<svg id="tree" width="1500" height="600"></svg>
+
+<div id="choice-buttons" style="margin-top: 20px; text-align: center;">
+    <p><strong>Select your choice:</strong></p>
+    {{ form.player_choice }}
+</div>
+
+
+<div id="countdown" style="margin-top: 20px; font-size: 18px; font-weight: bold; color: #333;">
+  Next button will appear in <span id="countdown-timer">10</span> seconds...
+</div>
+
+<div id="next-button-container" style="display: none; margin-top: 20px;">
+  <p>{{ next_button }}</p>
+</div>
+
+<input type="hidden" id="click_data" name="click_data" value="{{ player.click_data }}">
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+  .node circle {
+    fill: lightblue;
+    stroke: black;
+    stroke-width: 1.5px;
+  }
+  .node text {
+    font-size: 15px;
+    text-anchor: middle;
+  }
+  .link {
+    fill: none;
+    stroke: black;
+    stroke-width: 8px;
+  }
+  .highlight {
+    stroke: orange;
+  }
+  .dashed-line {
+    stroke-dasharray: 5, 5;
+    stroke: black;
+    stroke-width: 3px;
+  }
+
+  .otree-timer {
+    display: none;
+  }
+</style>
+
+
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+let clickData = [];
+const visibleLinesMap = {};
+
+function drawGameTree() {
+    d3.select("#tree").selectAll("*").remove();
+    const svg = d3.select("#tree").append("g").attr("transform", "translate(0,0)");
+
+    const defs = svg.append("defs");
+    defs.append("marker").attr("id", "arrowhead")
+        .attr("viewBox", "0 -4 10 8").attr("refX", 21).attr("refY", 0)
+        .attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto")
+        .append("path").attr("d", "M0,-4L10,0L0,4").attr("fill", "black");
+    defs.append("marker").attr("id", "arrowhead-highlight")
+        .attr("viewBox", "0 -4 10 8").attr("refX", 21).attr("refY", 0)
+        .attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto")
+        .append("path").attr("d", "M0,-4L10,0L0,4").attr("fill", "orange");
+
+    const nodes = [
+        {id: "O1", x: 200, y: 100, shape: "square", color: "red", type: "decision"},
+        {id: "O2", x: 600, y: 100, shape: "circle", color: "blue", type: "decision"},
+        {id: "x1", x: 200, y: 300, shape: "triangle", color: "green", type: "decision"},
+        {id: "x2", x: 600, y: 300, shape: "triangle", color: "green", type: "decision"},
+        {
+            id: "O3", x: 800, y: 100, shape: "circle", color: "black", type: "payoff",
+            payoffs: [
+                {shape: "square", color: "red", value: 90},
+                {shape: "circle", color: "blue", value: 90},
+                {shape: "triangle", color: "green", value: 90}
+            ]
+        },
+        {
+            id: "z1", x: 100, y: 450, shape: "circle", color: "black", type: "payoff",
+            payoffs: [
+                {shape: "square", color: "red", value: 120},
+                {shape: "circle", color: "blue", value: 60},
+                {shape: "triangle", color: "green", value: 90}
+            ]
+        },
+        {
+            id: "z2", x: 300, y: 450, shape: "circle", color: "black", type: "payoff",
+            payoffs: [
+                {shape: "square", color: "red", value: 60},
+                {shape: "circle", color: "blue", value: 150},
+                {shape: "triangle", color: "green", value: 60}
+            ]
+        },
+        {
+            id: "z3", x: 500, y: 450, shape: "circle", color: "black", type: "payoff",
+            payoffs: [
+                {shape: "square", color: "red", value: 135},
+                {shape: "circle", color: "blue", value: 105},
+                {shape: "triangle", color: "green", value: 30}
+            ]
+        },
+        {
+            id: "z4", x: 700, y: 450, shape: "circle", color: "black", type: "payoff",
+            payoffs: [
+                {shape: "square", color: "red", value: 45},
+                {shape: "circle", color: "blue", value: 45},
+                {shape: "triangle", color: "green", value: 180}
+            ]
+        }
+    ];
+
+    const links = [
+        {id: "L1", source: "O1", target: "O2", label: "Pass to Circle", offsetX: -10, offsetY: -20},
+        {id: "L2", source: "O1", target: "x1", label: "Pass to Triangle", offsetX: 85, offsetY: 0},
+        {id: "L3", source: "O2", target: "O3", label: "End the game", offsetX: 20, offsetY: -20},
+        {id: "L4", source: "O2", target: "x2", label: "Pass to Triangle", offsetX: 85, offsetY: 0},
+        {id: "L5", source: "x1", target: "z1", label: "End Left", offsetX: -60, offsetY: 10},
+        {id: "L6", source: "x1", target: "z2", label: "End Right", offsetX: 60, offsetY: 10},
+        {id: "L7", source: "x2", target: "z3", label: "End Left", offsetX: -60, offsetY: 10},
+        {id: "L8", source: "x2", target: "z4", label: "End Right", offsetX: 60, offsetY: 10},
+    ];
+
+    const x1 = nodes.find(n => n.id === "x1");
+    const x2 = nodes.find(n => n.id === "x2");
+
+    svg.append("rect")
+        .attr("x", x1.x - 80).attr("y", x1.y - 75)
+        .attr("width", (x2.x - x1.x) + 160).attr("height", 135)
+        .attr("rx", 25).attr("ry", 25)
+        .style("fill", "none").style("stroke", "green")
+        .style("stroke-width", 4).style("stroke-dasharray", "6, 4");
+
+    svg.append("text")
+        .attr("x", (x1.x + x2.x) / 2).attr("y", x1.y - 20)
+        .attr("text-anchor", "middle").style("font-size", "16px")
+        .style("font-weight", "bold").style("fill", "green")
+        .text("Triangle is NOT informed which");
+
+    svg.append("text")
+        .attr("x", (x1.x + x2.x) / 2).attr("y", x1.y + 10)
+        .attr("text-anchor", "middle").style("font-size", "16px")
+        .style("font-weight", "bold").style("fill", "green")
+        .text("participant passed to them");
+
+    links.forEach((link, index) => {
+        const source = nodes.find(n => n.id === link.source);
+        const target = nodes.find(n => n.id === link.target);
+        const isArrowed = target.type === "decision";
+
+        const visibleLine = svg.append("line")
+            .attr("class", `link link-${index}`)
+            .attr("id", link.id)
+            .attr("x1", source.x).attr("y1", source.y)
+            .attr("x2", target.x).attr("y2", target.y)
+            .attr("marker-end", isArrowed ? "url(#arrowhead)" : null)
+            .style("stroke", "black").style("stroke-width", 8);
+
+        visibleLinesMap[index] = {line: visibleLine, isArrowed: isArrowed};
+
+        svg.append("line")
+            .attr("class", `link-overlay link-${index}`)
+            .attr("x1", source.x).attr("y1", source.y)
+            .attr("x2", target.x).attr("y2", target.y)
+            .style("stroke", "transparent").style("stroke-width", 30)
+            .style("cursor", "pointer")
+            .on("click", () => handleLinkClick(index, link.id));
+
+        svg.append("text")
+            .attr("x", (source.x + target.x) / 2 + (link.offsetX || 0))
+            .attr("y", (source.y + target.y) / 2 + (link.offsetY || 0))
+            .attr("text-anchor", "middle").style("font-size", "18px")
+            .style("fill", "black").text(link.label);
+    });
+
+    nodes.forEach(node => {
+        const group = svg.append("g")
+            .attr("class", "node")
+            .attr("transform", `translate(${node.x},${node.y})`);
+
+        if (node.shape === "square") {
+            group.append("rect")
+                .attr("x", -60).attr("y", -60)
+                .attr("width", 120).attr("height", 120)
+                .style("fill", node.color)
+                .style("stroke", "black");
+        } else if (node.shape === "circle") {
+            group.append("circle")
+                .attr("r", node.type === "payoff" ? 8 : 60)
+                .style("fill", node.color)
+                .style("stroke", "black");
+        } else if (node.shape === "triangle") {
+            group.append("path")
+                .attr("d", d3.symbol().type(d3.symbolTriangle).size(7200))
+                .attr("transform", "translate(0,10)")
+                .style("fill", node.color)
+                .style("stroke", "black");
+        }
+
+        if (node.payoffs) {
+            node.payoffs.forEach((p, i) => {
+                if (node.id === "O3") {
+                    gx = node.x + 40 + i * 50;
+                    gy = node.y;
+                } else {
+                    gx = node.x - 45 + i * 56;
+                    gy = node.y + 35;
+                }
+
+                if (p.shape === "square") {
+                    svg.append("rect")
+                        .attr("x", gx - 12).attr("y", gy - 12)
+                        .attr("width", 24).attr("height", 24)
+                        .style("fill", p.color)
+                        .style("stroke", "black");
+                } else if (p.shape === "circle") {
+                    svg.append("circle")
+                        .attr("cx", gx).attr("cy", gy)
+                        .attr("r", 12)
+                        .style("fill", p.color)
+                        .style("stroke", "black");
+                } else if (p.shape === "triangle") {
+                    svg.append("path")
+                        .attr("d", d3.symbol().type(d3.symbolTriangle).size(300))
+                        .attr("transform", `translate(${gx},${gy + 2})`)
+                        .style("fill", p.color)
+                        .style("stroke", "black");
+                }
+
+                svg.append("text")
+                    .attr("x", gx + 14).attr("y", gy + 4)
+                    .style("font-size", "20px")
+                    .style("fill", "black")
+                    .text(p.value);
+            });
+        }
+    });
+}
+
+function handleLinkClick(index, linkId) {
+  const item = visibleLinesMap[index];
+  const line = item.line;
+  const isArrowed = item.isArrowed;
+  const isHighlighted = line.classed("highlight");
+
+  if (isHighlighted) {
+    line.classed("highlight", false)
+      .style("stroke", "black")
+      .attr("marker-end", isArrowed ? "url(#arrowhead)" : null);
+  } else {
+    line.classed("highlight", true)
+      .style("stroke", "orange")
+      .attr("marker-end", isArrowed ? "url(#arrowhead-highlight)" : null);
+    switch (index) {
+      case 0: unhighlightLine(1); break;
+      case 1: unhighlightLine(0); break;
+      case 2: unhighlightLine(3); break;
+      case 3: unhighlightLine(2); break;
+      case 4: unhighlightLine(5); break;
+      case 5: unhighlightLine(4); break;
+      case 6: unhighlightLine(7); break;
+      case 7: unhighlightLine(6); break;
+    }
+  }
+
+  clickData.push({ order: clickData.length + 1, line: linkId });
+  document.getElementById("click_data").value = JSON.stringify(clickData);
+}
+
+function unhighlightLine(idx) {
+  const item = visibleLinesMap[idx];
+  const line = item.line;
+  const isArrowed = item.isArrowed;
+  line.classed("highlight", false)
+    .style("stroke", "black")
+    .attr("marker-end", isArrowed ? "url(#arrowhead)" : null);
+}
+
+drawGameTree();
+
+let countdown = 10;
+const countdownElement = document.getElementById("countdown-timer");
+const interval = setInterval(() => {
+  countdown -= 1;
+  countdownElement.textContent = countdown;
+  if (countdown === 0) {
+    clearInterval(interval);
+    document.getElementById("countdown").style.display = "none";
+    document.getElementById("next-button-container").style.display = "block";
+  }
+}, 1000);
+</script>
+
+
+{% endblock %}

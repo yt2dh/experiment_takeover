@@ -1,0 +1,61 @@
+{{ block title }}
+    <h1>Results - Round {{ player.round_number }}</h1>
+    {% load otree static %}
+    <link rel="stylesheet" href="{% static 'global/css/button.css' %}"/>
+{{ endblock }}
+
+{{ block content }}
+
+
+    <style> p {text-align: center; line-height: 32px;   /* within paragraph */
+  margin-bottom: 30px; /* between paragraphs */}
+            .paragraph2 {font-size: 18px;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+    </style>
+
+    <style> st {text-align: center; font-size:130%;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+            h1 {
+                      text-align: center;
+                      margin-bottom: 35px;
+            }
+    </style>
+
+    <style> r {text-align: center; font-size:100%;color:red;}
+            .paragraph2 {font-size: 18px;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+            h1 {
+                      text-align: center;
+                      margin-bottom: 35px;
+            }
+    </style>
+
+    <!--<st> <u> <b>Results from Stage 1</b> </u> </st>-->
+
+    <p class="paragraph2"> The value of the asset to the seller <b>$V</b> is <b>{{ player.firm_value }}</b>. You are the <b>{{ is_buyer_after}}</b>.</p>
+
+    <p class="paragraph2"> The buyer's bid is <b><span style="color: #E57200">{{ group.buyer_choice }}</b> and the seller <b><span style="color: #00008B">{{ group.field_display('seller_choice') }}</b> the bid.</p>
+
+    <p class="paragraph2"> Your earnings from this round is <b><span style="color: #008000">{{ player.payoff }}</b>, which may be randomly chosen by the computer for your final payment.</p>
+
+    <button class="button">Next</button>
+{{ endblock }}
+
