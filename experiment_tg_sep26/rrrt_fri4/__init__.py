@@ -51,6 +51,7 @@ Fixed_Float_Values = [[0.80, 1.20, 1.80, 0.20],  #1
                       [0.80, 4.00, 6.00, 0.20],  #6
                       [0.80, 1.20, 1.80, 0.20],  #4
                       [0.80, 4.00, 6.00, 0.20],  #10
+                      [0.20, 4.00, 6.00, 0.80],  #13
                       [0.20, 4.00, 6.00, 0.80],  # 12
                       [0.20, 4.00, 6.00, 0.80],  # 11
                       [0.80, 1.20, 1.80, 0.20],  #2
@@ -604,3 +605,4 @@ class Payoff(Page):
     pass
 
 page_sequence = [Welcome, Intro, Intro_2, Intro_3, Intro_Questions, Intro_Answers, IntroWaitPage, CompareNumsChoice, WaitPagebuyer, CompareNumsChoice_seller, WaitPageseller, ResultsWaitPage, Outcome, Additional_Task, FinalWaitPage, Payoff]
+
