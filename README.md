@@ -10,7 +10,7 @@ This project demonstrates how to design, deploy, and maintain an interactive exp
 ## Key Features
 
 - **Randomized assignment** of participants to roles and treatments
-- **Multi-round sessions** with role-based decisions
+- **Multi-round sessions** with role-based permissions
 - **Server-side input validation** to prevent invalid or inconsistent actions
 - **Deterministic payoff computation** from user decisions
 - **Export-ready datasets** designed for analysis in Python / SQL / R
