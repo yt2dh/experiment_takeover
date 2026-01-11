@@ -39,15 +39,11 @@ ROOMS = [
     dict(
         name='experiment_tg_fri3',
         display_name='fri3',
-        # participant_label_file='_rooms/your_study.txt',
-        # use_secure_urls=True,
     ),
 
     dict(
         name='experiment_tg_fri4',
         display_name='fri4',
-        # participant_label_file='_rooms/your_study.txt',
-        # use_secure_urls=True,
     ),
 
 
@@ -65,4 +61,5 @@ Here are some oTree games.
 SECRET_KEY = '6499273906912'
 
 INSTALLED_APPS = ['otree']
+
 
