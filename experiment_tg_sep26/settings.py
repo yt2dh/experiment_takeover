@@ -9,12 +9,6 @@ SESSION_CONFIGS = [
          num_demo_participants=4,
          ),
 
-    dict(name='experiment_tg_fri4',
-         display_name="fri4",
-         app_sequence=['rrrt_fri4'],
-         num_demo_participants=4,
-         ),
-
 ]
 
 SESSION_CONFIG_DEFAULTS = dict(
@@ -61,5 +55,6 @@ Here are some oTree games.
 SECRET_KEY = '6499273906912'
 
 INSTALLED_APPS = ['otree']
+
 
 
