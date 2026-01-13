@@ -77,5 +77,5 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # 3. Run the local server
-otree devserver
+python -m otree devserver
 
