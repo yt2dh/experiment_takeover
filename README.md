@@ -2,14 +2,14 @@
 
 This project implements a configurable experimental platform in Python (oTree) to study how information asymmetry and belief distortions affect bidding and acceptance decisions in bilateral trade.
 
-The system supports multi-round experiments, role-based logic, incentive-compatible payoffs, and structured data output suitable for causal and structural analysis.
+The system supports multi-round experiments, role-based logic, incentive-compatible payoff computation, and structured data output suitable for causal and structural analysis.
 
 
 ---
 ## Skills Demonstrated
 - Experimental system design (multi-round, role-based logic)
 - Python backend development (state management, payoff rules)
-- Incentive-compatible mechanism implementation
+- Rule-based, incentive-compatible mechanism implementation
 - Data generation pipelines for behavioral analysis
 - Reproducible research and clean project structure
 
@@ -61,6 +61,8 @@ experiment_takeover/
 5. Results are stored and exported as structured datasets.
 
 This architecture mirrors real-world A/B testing, market simulation, and behavioral data collection systems.
+
+All role restrictions, transitions, and payoff logic are enforced server-side to ensure protocol integrity and clean data capture.
 
 ---
 
