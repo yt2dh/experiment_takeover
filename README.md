@@ -31,17 +31,12 @@ This project demonstrates how to design, deploy, and maintain an interactive exp
 
 ```text
 experiment_takeover/
-├── app_takeover/            # Core experiment logic (models, pages, payoff rules)
-│   ├── __init__.py
-│   ├── models.py            # Game state, roles, payoff logic
-│   ├── pages.py             # Participant flow and UI routing
-│   ├── templates/           # HTML templates
-│   └── tests.py             # (Optional) logic tests
+├── rrrt_fri3/            # Core experiment logic (models, pages, payoff rules)
+│   ├── __init__.py          # Game state, roles, payoff logic, participant flow, and UI routing
+│   └── templates/           # HTML templates
 ├── settings.py              # Global experiment configuration
 ├── requirements.txt         # Python dependencies
-├── README.md
-└── examples/
-    └── sample_output.csv    # Example anonymized data export
+└── README.md
 
 
 
