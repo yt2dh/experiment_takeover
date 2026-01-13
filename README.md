@@ -44,13 +44,13 @@ experiment_takeover/
 
 ## How It Works
 
-1. Participants join a session and are **randomly assigned** to a role.
+1. Participants join a session and are randomly assigned to a role.
 2. Treatments are assigned at the session or group level.
-3. Participants make decisions subject to **input constraints**.
+3. Participants make decisions subject to input constraints.
 4. The server computes payoffs deterministically from decisions.
 5. Results are stored and exported as structured datasets.
 
-This architecture mirrors real-world **A/B testing**, **market simulation**, and **behavioral data collection** systems.
+This architecture mirrors real-world A/B testing, market simulation, and behavioral data collection systems.
 
 ---
 
