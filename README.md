@@ -40,11 +40,13 @@ The system supports multi-round experiments, role-based logic, incentive-compati
 ```text
 experiment_takeover/
 ├── rrrt_fri3/            # Web app: core experiment logic (models, pages, payoff rules)
-│   ├── __init__.py          # Game state, roles, payoff logic, participant flow, and UI routing
-│   └── templates/           # HTML templates
-├── settings.py              # Global experiment configuration
-├── requirements.txt         # Python dependencies
-└── README.md
+│   ├── __init__.py       # Game state, roles, payoff logic, participant flow, and UI routing
+│   └── templates         # HTML templates
+├── settings.py           # Global experiment configuration
+├── requirements.txt      # Python dependencies
+├── README.md
+└── examples/
+    └── sample_output.csv        # Example anonymized export
 ```
 
 
