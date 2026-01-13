@@ -32,7 +32,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        //stackoverflow.com/questions/918792/
         $.extend({
             replaceTag: function (currentElem, newTagObj, keepProps) {
                 var $currentElem = $(currentElem);
@@ -55,7 +54,7 @@
                 });
             }
         });
-        // here we rework the wait page to exactly mimic the content page -- lucas reddinger
+        // here we rework the wait page to exactly mimic the content page
         $('head > style').remove();
         $('body > div.container').removeClass('otree-wait-page');
         $('body > div.container').addClass('otree-body');
@@ -66,5 +65,6 @@
         $('div.progress').hide();
     });
 </script>
+
 
 {{ endblock }}
