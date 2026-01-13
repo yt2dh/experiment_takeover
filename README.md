@@ -1,9 +1,17 @@
-# Takeover Experiment Platform
+# Behavioral Experiment Platform for Strategic Decision-Making under Asymmetric Information
 
-A web-based experimentation platform for studying strategic decision-making under asymmetric information.  
-Built with **Python (oTree/Django)** and **HTML/CSS**, the app implements randomized treatments, role-based user flows, payoff computation, and clean data export for downstream analysis.
+This project implements a configurable experimental platform in Python (oTree) to study how information asymmetry and belief distortions affect bidding and acceptance decisions in bilateral trade.
 
-This project demonstrates how to design, deploy, and maintain an interactive experiment / web app with reliable data pipelines and reproducible logic.
+The system supports multi-round experiments, role-based logic, incentive-compatible payoffs, and structured data output suitable for causal and structural analysis.
+
+
+---
+## Skills Demonstrated
+- Experimental system design (multi-round, role-based logic)
+- Python backend development (state management, payoff rules)
+- Incentive-compatible mechanism implementation
+- Data generation pipelines for behavioral analysis
+- Reproducible research and clean project structure
 
 ---
 
