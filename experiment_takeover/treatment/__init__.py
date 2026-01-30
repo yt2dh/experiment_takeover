@@ -288,7 +288,7 @@ class CompareNumsChoice(Page):
 
 class WaitPagebuyer(WaitPage):
     wait_for_all_groups = True
-    template_name = 'rrrt_fri3/WaitPagebuyer.html'
+    template_name = 'treatment/WaitPagebuyer.html'
 
     def vars_for_template(player):
         if player.round_number > 1:
@@ -340,7 +340,7 @@ class CompareNumsChoice_seller(Page):
 
 class WaitPageseller(WaitPage):
     wait_for_all_groups = True
-    template_name = 'rrrt_fri3/WaitPageseller.html'
+    template_name = 'treatment/WaitPageseller.html'
 
     def vars_for_template(player):
         if player.round_number > 1:
@@ -452,5 +452,6 @@ class Payoff(Page):
     pass
 
 page_sequence = [Welcome, Intro, Intro_2, Intro_3, Intro_Questions, Intro_Answers, IntroWaitPage, CompareNumsChoice, WaitPagebuyer, CompareNumsChoice_seller, WaitPageseller, ResultsWaitPage, Outcome, Additional_Task, FinalWaitPage, Payoff]
+
 
 
