@@ -4,8 +4,8 @@ from os import environ
 SESSION_CONFIGS = [
 
     dict(name='experiment_tg_fri3',
-         display_name="fri3",
-         app_sequence=['rrrt_fri3'],
+         display_name="exp",
+         app_sequence=['treatment'],
          num_demo_participants=4,
          ),
 
@@ -30,17 +30,6 @@ ROOMS = [
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
 
 
-    dict(
-        name='experiment_tg_fri3',
-        display_name='fri3',
-    ),
-
-    dict(
-        name='experiment_tg_fri4',
-        display_name='fri4',
-    ),
-
-
 ]
 
 ADMIN_USERNAME = 'experiment'
@@ -55,6 +44,7 @@ Here are some oTree games.
 SECRET_KEY = '6499273906912'
 
 INSTALLED_APPS = ['otree']
+
 
 
 
