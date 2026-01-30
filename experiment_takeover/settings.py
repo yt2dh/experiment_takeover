@@ -28,7 +28,11 @@ USE_POINTS = False
 ROOMS = [
 
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
-
+    
+    dict(
+        name='experiment_tg_fri3',
+        display_name='exp',
+    ),
 
 ]
 
@@ -44,6 +48,7 @@ Here are some oTree games.
 SECRET_KEY = '6499273906912'
 
 INSTALLED_APPS = ['otree']
+
 
 
 
