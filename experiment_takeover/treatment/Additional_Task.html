@@ -1,0 +1,124 @@
+{{ block title }}
+    <h1>Additional Task</h1>
+    {% load otree static %}
+    <link rel="stylesheet" href="{% static 'global/css/button.css' %}"/>
+{{ endblock }}
+{{ block content }}
+    <style> p {text-align: left;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+            table {
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            h {text-align: center;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                      font-weight: bold;
+                    }
+            h1 {
+
+                      margin-bottom: 35px;
+            }
+    </style>
+
+    <p>The table below consists of 10 rows of options. In each row, you will choose between <b>Option ONE</b> and <b>Option TWO</b>.</p>
+
+
+
+    <p>For example, Row 1 indicates that: </p>
+
+    <ul> <li>If I choose <b>Option ONE</b>, there is a 10% chance that I will gain <b>$2</b> and a 90% chance that I will gain <b>$1.6</b>; </li>
+        <li>If I choose <b>Option TWO</b>, there is a 10% chance that I will gain <b>$3.85</b> and a 90% chance that I will gain <b>$0.1</b>.</li>
+    </ul>
+
+    <p>For each row of options, choose the option that you prefer more.</p>
+
+    <table class="table">
+
+        <tr>
+            <th> </th>
+            <th> Option ONE </th>
+            <th> Option TWO </th>
+            <th> </th>
+        </tr>
+
+
+        <tr>
+            <td>Row 1</td>
+            <td>(10%, <b>$2</b>) and (90%, <b>$1.6</b>)</td>
+            <td>(10%, <b>$3.85</b>) and (90%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair1 }}</td>
+        </tr>
+        <tr>
+            <td>Row 2</td>
+            <td>(20%, <b>$2</b>) and (80%, <b>$1.6</b>)</td>
+            <td>(20%, <b>$3.85</b>) and (80%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair2 }}</td>
+        </tr>
+        <tr>
+            <td>Row 3</td>
+            <td>(30%, <b>$2</b>) and (70%, <b>$1.6</b>)</td>
+            <td>(30%, <b>$3.85</b>) and (70%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair3 }}</td>
+        </tr>
+        <tr>
+            <td>Row 4</td>
+            <td>(40%, <b>$2</b>) and (60%, <b>$1.6</b>)</td>
+            <td>(40%, <b>$3.85</b>) and (60%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair4 }}</td>
+        </tr>
+        <tr>
+            <td>Row 5</td>
+            <td>(50%, <b>$2</b>) and (50%, <b>$1.6</b>)</td>
+            <td>(50%, <b>$3.85</b>) and (50%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair5 }}</td>
+        </tr>
+        <tr>
+            <td>Row 6</td>
+            <td>(60%, <b>$2</b>) and (40%, <b>$1.6</b>)</td>
+            <td>(60%, <b>$3.85</b>) and (40%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair6 }}</td>
+        </tr>
+        <tr>
+            <td>Row 7</td>
+            <td>(70%, <b>$2</b>) and (30%, <b>$1.6</b>)</td>
+            <td>(70%, <b>$3.85</b>) and (30%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair7 }}</td>
+        </tr>
+        <tr>
+            <td>Row 8</td>
+            <td>(80%, <b>$2</b>) and (20%, <b>$1.6</b>)</td>
+            <td>(80%, <b>$3.85</b>) and (20%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair8 }}</td>
+        </tr>
+        <tr>
+            <td>Row 9</td>
+            <td>(90%, <b>$2</b>) and (10%, <b>$1.6</b>)</td>
+            <td>(90%, <b>$3.85</b>) and (10%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair9 }}</td>
+        </tr>
+        <tr>
+            <td>Row 10</td>
+            <td>(100%, <b>$2</b>) and (0%, <b>$1.6</b>)</td>
+            <td>(100%, <b>$3.85</b>) and (0%, <b>$0.1</b>)</td>
+            <td>{{ form.Question1Pair10 }}</td>
+        </tr>
+
+    </table>
+
+
+    <button class="button">Next</button>
+
+{{ endblock }}

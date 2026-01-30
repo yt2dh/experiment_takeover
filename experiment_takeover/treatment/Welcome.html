@@ -1,0 +1,36 @@
+{{ block title }}
+    Welcome!
+    {% load otree static %}
+    <link rel="stylesheet" href="{% static 'global/css/button.css' %}"/>
+{{ endblock }}
+{{ block content }}
+
+    <style> p {text-align: center;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+            table {
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            h {text-align: center;}
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                      font-weight: bold;
+                    }
+    </style>
+
+      {{ formfields }}
+
+
+    <button class="button">Next</button>
+{{ endblock }}

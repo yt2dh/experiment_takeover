@@ -1,0 +1,36 @@
+{{ block title }}
+    Introduction (Page 1 of 3)
+    {% load otree static %}
+    <link rel="stylesheet" href="{% static 'global/css/button.css' %}"/>
+{{ endblock }}
+{{ block content }}
+
+    <style> p {text-align: left; }
+            #myDIV {
+                      width: 100%;
+                      padding: 50px 0;
+                      text-align: center;
+                      background-color: lightblue;
+                      margin-top: 20px;
+                    }
+    </style>
+
+    <ul>
+    <li>Thank you for joining this experiment. You are about to take part in a decision-making experiment, where you will enter your choices using the computer in front of you. All interactions between participants will take place through computers. Please do not talk or try to communicate in any way with other participants during the session. To proceed from one page to the other during the experiment, click the “Next” button at the end of each page. If you have any questions at any point during the experiment, please raise your hand and I will go to your desk to answer your question.</li>
+    </ul>
+
+    <ul>
+        <li>This experiment consists of two tasks: the main task and an additional task. The main task consists of 15 rounds. You will make one decision in each round. Before the 15 rounds begin, you will answer three questions to make sure that you have understood the instructions. The additional task consists of 1 round, and you will make 10 decisions in this round.</li>
+    </ul>
+
+    <ul>
+        <li>You will be paid based on the choices that you and the other participants make. At the end of the experiment, one of the 15 rounds will be randomly chosen to determine your final earnings in this experiment. The earnings from this chosen round will be multiplied by four to calculate your final earnings. In addition to the earnings from one of the 15 rounds in the main task that is scaled up by a factor of four, and the earnings from one of the 10 decisions in the additional task, you will receive a show-up fee of $10. Your total earnings will be rounded up to the nearest dollar and paid in cash privately.</li>
+    </ul>
+
+    <ul>
+        <li>At the end of the experiment, I will call out the number assigned to each computer to hand out the payments.  Please come to my desk when your number is called to receive your payment.  </li>
+    </ul>
+
+
+    <button class="button">Next</button>
+{{ endblock }}
