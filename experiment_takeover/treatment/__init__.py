@@ -57,7 +57,7 @@ Fixed_Float_Values = [[0.80, 1.20, 1.80, 0.20],  #5
                       ]
 
 class Constants(BaseConstants): #parameters that stay the same for all players
-    name_in_url = 'rrrt_fri3'
+    name_in_url = 'treatment'
     players_per_group = 2
     num_rounds = 15
     multiplier = 1.5
@@ -452,4 +452,5 @@ class Payoff(Page):
     pass
 
 page_sequence = [Welcome, Intro, Intro_2, Intro_3, Intro_Questions, Intro_Answers, IntroWaitPage, CompareNumsChoice, WaitPagebuyer, CompareNumsChoice_seller, WaitPageseller, ResultsWaitPage, Outcome, Additional_Task, FinalWaitPage, Payoff]
+
 
